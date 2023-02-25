@@ -94,12 +94,14 @@ body {
 }
 
 .container {
-  width: 570px;
+  width: 90%;
+  max-width: 570px;
   margin: 0 auto;
 }
 
 .main {
   padding-top: 100px;
+  padding-bottom: 50px;
 }
 
 .main__city {
@@ -122,4 +124,42 @@ body {
   font-size: 64px;
   line-height: 72px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 32px;
+    line-height: 36px;
+  }
+  .main__city {
+    margin-bottom: 40px;
+  }
+  .main__temperature {
+    font-size: 40px;
+    line-height: 45px;
+  }
+  .main__weather {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 576px) {
+  body {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .main {
+    padding-top: 30px;
+  }
+  .main__city {
+    margin-bottom: 35px;
+  }
+  .main__temperature {
+    font-size: 32px;
+    line-height: 36px;
+    margin-bottom: 15px;
+  }
+  .main__weather {
+    margin-bottom: 35px;
+  }
 }

@@ -10,6 +10,11 @@
 # Icon must end with two \r
 Icon
 
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map
 
 # Thumbnails
 ._*

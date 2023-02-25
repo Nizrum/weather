@@ -11,6 +11,7 @@
 Icon
 
 ### Sass ###
+scss/
 .sass-cache/
 *.css.map
 *.sass.map

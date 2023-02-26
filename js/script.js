@@ -1,6 +1,7 @@
 const cityName = document.querySelector(".main__city-name");
 const cityInput = document.querySelector(".main__city-input");
 const mainTemperature = document.querySelector(".main__temperature");
+const mainIcon = document.querySelector(".main__icon");
 const mainInfo = document.querySelector(".main__info");
 const mainRecomendation = document.querySelector(".main__recomendation");
 
@@ -21,10 +22,12 @@ cityInput.addEventListener("keydown", (event) => {
 });
 
 const changeCity = () => {
-    getData(cityInput.value);
-    cityInput.blur();
-    cityName.classList.remove("d-none");
-    cityInput.classList.add("d-none");
+    if (cityInput.value.trim() != "") {
+        getData(cityInput.value);
+        cityInput.blur();
+        cityName.classList.remove("d-none");
+        cityInput.classList.add("d-none");
+    }
 };
 
 const getData = (city) => {
@@ -37,12 +40,40 @@ const getData = (city) => {
             localStorage.setItem("currentCity", data.name);
             cityName.textContent = data.name;
             mainTemperature.textContent = Math.round(data.main.temp) + "°";
-            mainInfo.textContent = `${data.weather[0].description}, ветер ${Math.round(data.wind.speed)} м/с`;
-            mainRecomendation.textContent = 'Рекомендуем надеть куртку, шапку, ботинки и взять с собой зонтик.';
+            mainIcon.classList.remove("d-none");
+            mainIcon.src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            mainInfo.textContent = `${
+                data.weather[0].description[0].toUpperCase() + data.weather[0].description.slice(1)
+            }, ветер ${Math.round(data.wind.speed)} м/с`;
+            let clothes = [];
+            if (data.main.temp > 20) {
+                clothes = ["футболку", "шорты", "кроссовки"];
+            } else if (data.main.temp > 15) {
+                clothes = ["кофту", "штаны", "кроссовки"];
+            } else if (data.main.temp > 10) {
+                clothes = ["лёгкую куртку", "кофту", "штаны", "кроссовки"];
+            } else if (data.main.temp > 5) {
+                clothes = ["шапку", "лёгкую куртку", "кофту", "штаны", "утеплённую обвувь"];
+            } else if (data.main.temp > -10) {
+                clothes = ["шапку", "тёплую куртку", "кофту", "штаны", "тёплые ботинки"];
+            } else if (data.main.temp <= -10) {
+                clothes = ["шапку", "тёплую куртку", "кофту", "штаны", "подштанники", "тёплые ботинки"];
+            }
+            if (data.weather[0].main == "Rain") {
+                if (clothes.includes("кроссовки")) {
+                    clothes.splice(clothes.indexOf("кроссовки"), 1);
+                    clothes.push("непромокаемую обувь");
+                }
+                clothes.push("взять зонтик");
+            }
+            mainRecomendation.textContent = `Рекомендуем надеть ${
+                clothes.slice(0, -1).join(", ") + " и " + clothes[clothes.length - 1]
+            }.`;
         })
         .catch(() => {
             cityName.textContent = "Город не найден, попробуйте снова";
             mainTemperature.textContent = "";
+            mainIcon.classList.add("d-none");
             mainInfo.textContent = "";
             mainRecomendation.textContent = "";
         });

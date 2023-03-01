@@ -94,14 +94,21 @@ body {
 }
 
 .container {
-  width: 90%;
-  max-width: 570px;
+  width: 870px;
   margin: 0 auto;
 }
 
 .main {
-  padding-top: 100px;
+  padding-top: 70px;
   padding-bottom: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.main__text {
+  width: 570px;
 }
 
 .main__city {
@@ -140,14 +147,154 @@ body {
   margin-bottom: 20px;
 }
 
+.manikin {
+  width: 270px;
+  height: 600px;
+  position: relative;
+}
+
+.manikin__cap {
+  position: absolute;
+  z-index: 17;
+  top: 0;
+  left: 103px;
+  width: 77px;
+}
+
+.manikin__hat {
+  position: absolute;
+  z-index: 17;
+  top: 0px;
+  left: 119px;
+  width: 60.5px;
+}
+
+.manikin__scarf {
+  position: absolute;
+  z-index: 17;
+  top: 63.5px;
+  left: 108px;
+  width: 78.5px;
+}
+
+.manikin__head {
+  position: absolute;
+  z-index: 16;
+  top: 0px;
+  left: 118.5px;
+  width: 60.5px;
+}
+
+.manikin__hoodie {
+  position: absolute;
+  z-index: 15;
+  top: 37.5px;
+  left: 21px;
+  width: 227.5px;
+}
+
+.manikin__warm-jacket {
+  position: absolute;
+  z-index: 15;
+  top: 23px;
+  left: 19.5px;
+  width: 229.5px;
+}
+
+.manikin__jacket {
+  position: absolute;
+  z-index: 15;
+  top: 38px;
+  left: 21px;
+  width: 226.5px;
+}
+
+.manikin__t-shirt {
+  position: absolute;
+  z-index: 15;
+  top: 89px;
+  left: 25px;
+  width: 219.5px;
+}
+
+.manikin__gloves {
+  position: absolute;
+  z-index: 14;
+  top: 274px;
+  left: 0;
+  width: 270px;
+}
+
+.manikin__hands {
+  position: absolute;
+  z-index: 13;
+  top: 274px;
+  left: 0;
+  width: 270px;
+}
+
+.manikin__boots {
+  position: absolute;
+  z-index: 12;
+  bottom: 0;
+  left: 32px;
+  width: 156.5px;
+}
+
+.manikin__pants {
+  position: absolute;
+  z-index: 11;
+  top: 279.5px;
+  left: 63.5px;
+  width: 122.5px;
+}
+
+.manikin__shorts {
+  position: absolute;
+  z-index: 11;
+  top: 282px;
+  left: 72px;
+  width: 111px;
+}
+
+.manikin__sneakers {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 33px;
+  width: 152px;
+}
+
 .d-none {
   display: none;
 }
 
-@media (max-width: 768px) {
+.hidden {
+  visibility: hidden;
+}
+
+@media (max-width: 992px) {
+  .container {
+    width: 570px;
+  }
+  .main__text {
+    margin-bottom: 50px;
+  }
+  .manikin {
+    transform: scaleX(-1);
+  }
+}
+
+@media (max-width: 767px) {
   body {
     font-size: 32px;
     line-height: 36px;
+  }
+  .container {
+    width: 90%;
+  }
+  .main__text {
+    width: 100%;
   }
   .main__city {
     margin-bottom: 40px;
@@ -164,7 +311,7 @@ body {
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   body {
     font-size: 24px;
     line-height: 28px;

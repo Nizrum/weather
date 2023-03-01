@@ -4,6 +4,41 @@ const mainTemperature = document.querySelector(".main__temperature");
 const mainIcon = document.querySelector(".main__icon");
 const mainInfo = document.querySelector(".main__info");
 const mainRecomendation = document.querySelector(".main__recomendation");
+const manikin = document.querySelector(".manikin");
+const cap = document.querySelector(".manikin__cap");
+const boots = document.querySelector(".manikin__boots");
+const gloves = document.querySelector(".manikin__gloves");
+const hands = document.querySelector(".manikin__hands");
+const hat = document.querySelector(".manikin__hat");
+const head = document.querySelector(".manikin__head");
+const hoodie = document.querySelector(".manikin__hoodie");
+const jacket = document.querySelector(".manikin__jacket");
+const pants = document.querySelector(".manikin__pants");
+const scarf = document.querySelector(".manikin__scarf");
+const shorts = document.querySelector(".manikin__shorts");
+const sneakers = document.querySelector(".manikin__sneakers");
+const tShirt = document.querySelector(".manikin__t-shirt");
+const warmJacket = document.querySelector(".manikin__warm-jacket");
+const underpants = document.querySelector(".manikin__underpants");
+
+const dict = {
+    шапку: hat,
+    футболку: tShirt,
+    шорты: shorts,
+    кроссовки: sneakers,
+    кепку: cap,
+    кофту: hoodie,
+    штаны: pants,
+    "лёгкую куртку": jacket,
+    "утеплённую обувь": boots,
+    шарф: scarf,
+    "тёплую куртку": warmJacket,
+    "тёплые ботинки": boots,
+    "непромокаемую обувь": boots,
+    "тёплую шапку": hat,
+    подштанники: underpants,
+    перчатки: gloves,
+};
 
 cityName.addEventListener("click", () => {
     cityName.classList.add("d-none");
@@ -60,7 +95,16 @@ const getData = (city) => {
             } else if (data.main.temp > -10) {
                 clothes = ["шапку", "шарф", "тёплую куртку", "кофту", "штаны", "тёплые ботинки"];
             } else if (data.main.temp <= -10) {
-                clothes = ["тёплую шапку", "шарф", "тёплую куртку", "кофту", "штаны", "подштанники", "тёплые ботинки"];
+                clothes = [
+                    "тёплую шапку",
+                    "шарф",
+                    "перчатки",
+                    "тёплую куртку",
+                    "кофту",
+                    "штаны",
+                    "подштанники",
+                    "тёплые ботинки",
+                ];
             }
             if (data.weather[0].main == "Rain") {
                 if (clothes.includes("кроссовки")) {
@@ -72,8 +116,20 @@ const getData = (city) => {
             mainRecomendation.textContent = `Рекомендуем надеть ${
                 clothes.slice(0, -1).join(", ") + " и " + clothes[clothes.length - 1]
             }.`;
+            if (data.main.temp <= 10) {
+                clothes.splice(clothes.indexOf("кофту"), 1);
+            }
+            for (let elem of manikin.children) {
+                elem.classList.remove("visible");
+            }
+            head.classList.add("visible");
+            hands.classList.add("visible");
+            for (let elem of clothes) {
+                dict[elem].classList.add("visible");
+            }
         })
-        .catch(() => {
+        .catch((err) => {
+            console.log(err);
             cityName.textContent = "Город не найден, попробуйте снова";
             mainTemperature.textContent = "";
             mainIcon.classList.add("d-none");

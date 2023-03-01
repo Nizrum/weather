@@ -153,6 +153,10 @@ body {
   position: relative;
 }
 
+.manikin * {
+  visibility: hidden;
+}
+
 .manikin__cap {
   position: absolute;
   z-index: 17;
@@ -265,12 +269,20 @@ body {
   width: 152px;
 }
 
+.manikin__underpants {
+  position: absolute;
+  z-index: 10;
+  top: 100px;
+  left: 135px;
+  width: 0;
+}
+
 .d-none {
   display: none;
 }
 
-.hidden {
-  visibility: hidden;
+.visible {
+  visibility: visible;
 }
 
 @media (max-width: 992px) {

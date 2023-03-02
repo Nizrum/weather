@@ -116,9 +116,10 @@ const getData = (city) => {
             mainRecomendation.textContent = `Рекомендуем надеть ${
                 clothes.slice(0, -1).join(", ") + " и " + clothes[clothes.length - 1]
             }.`;
-            if (data.main.temp <= 10) {
+            if (data.main.temp <= 15) {
                 clothes.splice(clothes.indexOf("кофту"), 1);
             }
+            manikin.classList.remove("d-none");
             for (let elem of manikin.children) {
                 elem.classList.remove("visible");
             }
@@ -128,11 +129,11 @@ const getData = (city) => {
                 dict[elem].classList.add("visible");
             }
         })
-        .catch((err) => {
-            console.log(err);
+        .catch(() => {
             cityName.textContent = "Город не найден, попробуйте снова";
             mainTemperature.textContent = "";
             mainIcon.classList.add("d-none");
+            manikin.classList.add("d-none");
             mainInfo.textContent = "";
             mainRecomendation.textContent = "";
         });

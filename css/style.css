@@ -115,8 +115,25 @@ body {
   margin-bottom: 50px;
 }
 
+.main__city-name-wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
 .main__city-name {
   cursor: pointer;
+  position: relative;
+  line-height: 100%;
+}
+
+.main__city-edit-button {
+  cursor: pointer;
+  background-color: transparent;
+  margin-left: 20px;
+}
+
+.main__city-edit-icon {
+  height: 33px;
 }
 
 .main__city-input {
@@ -333,6 +350,9 @@ body {
   }
   .main__city {
     margin-bottom: 35px;
+  }
+  .main__city-edit-icon {
+    height: 24px;
   }
   .main__temperature {
     font-size: 32px;

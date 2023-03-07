@@ -1,5 +1,6 @@
 const cityName = document.querySelector(".main__city-name"),
     cityInput = document.querySelector(".main__city-input"),
+    cityEditButton = document.querySelector(".main__city-edit-button"),
     mainTemperature = document.querySelector(".main__temperature"),
     mainIcon = document.querySelector(".main__icon"),
     mainInfo = document.querySelector(".main__info"),
@@ -40,14 +41,22 @@ const dict = {
     перчатки: gloves,
 };
 
-const changeCity = () => {
+const cityChangeHandler = () => {
     if (cityInput.value.trim() != "") {
         getData(cityInput.value);
         cityInput.blur();
         cityName.classList.remove("d-none");
+        cityEditButton.classList.remove("d-none");
         cityInput.classList.add("d-none");
     }
 };
+
+const cityEditHandler = () => {
+    cityName.classList.add("d-none");
+    cityEditButton.classList.add("d-none");
+    cityInput.classList.remove("d-none");
+    cityInput.focus();
+}
 
 const getClothes = (data) => {
     let clothes = [];
@@ -131,7 +140,7 @@ const renderCityNotFound = () => {
 
 const getData = (city) => {
     fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=11233bdd6a0945b64d98ba77ab4b55a7&units=metric&lang=ru`
+        `https://api.openweathermap.org/data/2.5/weather?q=${city.trim()}&appid=11233bdd6a0945b64d98ba77ab4b55a7&units=metric&lang=ru`
     )
         .then((response) => response.text())
         .then((data) => JSON.parse(data))
@@ -145,18 +154,20 @@ const getData = (city) => {
 };
 
 cityName.addEventListener("click", () => {
-    cityName.classList.add("d-none");
-    cityInput.classList.remove("d-none");
-    cityInput.focus();
+    cityEditHandler();
+});
+
+cityEditButton.addEventListener("click", () => {
+    cityEditHandler();
 });
 
 cityInput.addEventListener("blur", () => {
-    changeCity();
+    cityChangeHandler();
 });
 
 cityInput.addEventListener("keydown", (event) => {
     if (event.key == "Enter") {
-        changeCity();
+        cityChangeHandler();
     }
 });
 

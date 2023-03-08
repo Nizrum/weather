@@ -30,6 +30,7 @@ const dict = {
     кепку: cap,
     кофту: hoodie,
     штаны: pants,
+    ветровку: jacket,
     "лёгкую куртку": jacket,
     "утеплённую обувь": boots,
     шарф: scarf,
@@ -56,7 +57,7 @@ const cityEditHandler = () => {
     cityEditButton.classList.add("d-none");
     cityInput.classList.remove("d-none");
     cityInput.focus();
-}
+};
 
 const getClothes = (data) => {
     let clothes = [];
@@ -85,6 +86,9 @@ const getClothes = (data) => {
             "подштанники",
             "тёплые ботинки",
         ];
+    }
+    if (data.main.temp > 15 && data.wind.speed >= 10) {
+        clothes.push("ветровку");
     }
     if (data.weather[0].main == "Rain") {
         if (clothes.includes("кроссовки")) {
@@ -123,6 +127,12 @@ const renderData = (data) => {
         clothes.slice(0, -1).join(", ") + " и " + clothes[clothes.length - 1]
     }.`;
     if (data.main.temp <= 15) {
+        clothes.splice(clothes.indexOf("кофту"), 1);
+    }
+    if (clothes.includes("ветровку") && clothes.includes("футболку")) {
+        clothes.splice(clothes.indexOf("футболку"), 1);
+    }
+    if (clothes.includes("ветровку") && clothes.includes("кофту")) {
         clothes.splice(clothes.indexOf("кофту"), 1);
     }
 
